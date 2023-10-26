@@ -1,99 +1,163 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import YoutubeChannels from "../Components/youtubeChannels/youtubeChannels.js";
 import Settings from "../Components/setting/settings.js";
 
+const defaultKeyList = [
+  "Ulp1eJp9efk",
+  "Ulp1eJp9efk",
+  "Ulp1eJp9efk",
+  "Ulp1eJp9efk",
+  "Ulp1eJp9efk",
+  "Ulp1eJp9efk",
+  "Ulp1eJp9efk",
+  "Ulp1eJp9efk",
+  "Ulp1eJp9efk",
+  "Ulp1eJp9efk",
+  "Ulp1eJp9efk",
+  "Ulp1eJp9efk",
+];
+
 export default function Home() {
   const [viewSettings, setViewSettings] = useState(true);
-  const [channelUrl, setChannelUrl] = useState(4);
-  const [channelBtn, setChannelBtn] = useState([4, 6, 8, 9, 12]);
-  const [channelIdInput, setChannelIdInput] = useState(
-    Array(channelUrl)
-      .fill("")
-      .map((item, index) => ({ id: index, value: "" }))
-  );
+  const [buttonName, setButtonName] = useState("4");
+  const [cookieClear, setCookieClear] = useState(true);
+  const initialInputValue = defaultKeyList.map((value, index) => ({
+    key: index,
+    value,
+  }));
+  const [inputValue, setInputValue] = useState(initialInputValue);
+  const [channelKey, setChannelKey] = useState([]);
 
-  const handleClick = () => {
+  useEffect(() => {
+    const storedChannelKey = localStorage.getItem("channelKey");
+    if (!storedChannelKey) {
+      setChannelKey(defaultKeyList);
+      setInputValue(initialInputValue);
+      localStorage.setItem("channelKey", JSON.stringify(defaultKeyList));
+    } else {
+      setChannelKey(JSON.parse(storedChannelKey));
+      setInputValue(
+        JSON.parse(storedChannelKey).map((value, index) => ({
+          key: index,
+          value,
+        }))
+      );
+    }
+  }, []);
+
+  const handleClearCookies = () => {
+    localStorage.removeItem("channelKey");
+    setChannelKey([]);
+    setInputValue(initialInputValue);
+    setCookieClear(!cookieClear);
+  };
+
+  const handleSettingsViewStatus = () => {
     setViewSettings(!viewSettings);
   };
 
-  const formHandle = (e) => {
-    e.preventDefault();
-    console.log(channelIdInput);
+  const createButtonsFromNames = () => {
+    const names = ["4", "6", "9", "12"];
+    const button = [];
+    names.map((name) => {
+      button.push(
+        <button
+          className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          id="2"
+          key={name}
+          onClick={(e) => setButtonName(e.target.innerHTML)}>
+          {name}
+        </button>
+      );
+    });
+
+    return button;
   };
 
-  const handleInputChange = (id, value) => {
-    const newChannelIdInput = [...channelIdInput];
-    newChannelIdInput[id] = { id: id, value: value };
-    setChannelIdInput(newChannelIdInput);
-  };
+  const getChannelNameInputs = () => {
+    let channelName = [];
 
-  const channelInput = () => {
-    let channels = [];
-    for (let i = 0; i < channelUrl; i++) {
-      channels.push(
-        <div key={`channelNames${i}`} className="flex m-1 p-1 ">
-          <p className="mr-4 text-white">Channel Name</p>
+    for (let index = 0; index < buttonName; index++) {
+      channelName.push(
+        <div key={index} className="flex items-center m-1 p-1  rounded-sm">
+          <p className="mr-4 text-white ">Channel Name</p>
           <input
-            className="text-black"
-            key={`channelName${i}`}
+            className="py-1.5 px-5 mr-2 mb-1 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            key={index}
             type="text"
-            value={channelIdInput[i] ? channelIdInput[i].value : ""}
-            onChange={(e) => handleInputChange(i, e.target.value)}
+            onChange={(e) => inputValues(index, e.target.value)}
+            value={inputValue[index] ? inputValue[index].value : ""}
+
+            // maxLength={20}
+            // min={1}
+            // required
           />
         </div>
       );
     }
-    return channels;
+
+    return channelName;
   };
-  const channelButtons = () => {
-    let buttons = [];
-    for (let i = 0; i < channelBtn.length; i++) {
-      buttons.push(
-        <button
-          className="w-10 m-1 p-2 rounded-md bg-slate-950"
-          id={`btn${channelBtn[i]}`}
-          key={`btnKey${channelBtn[i]}`}
-          onClick={() => setChannelUrl(channelBtn[i])}>
-          {channelBtn[i]}
-        </button>
-      );
-    }
-    return buttons;
+
+  const inputValues = (index, channelKeyInputValue) => {
+    setInputValue(() => {
+      const newInputValue = [...inputValue];
+      newInputValue[index] = { key: index, value: channelKeyInputValue };
+      return newInputValue;
+    });
   };
+
+  function formSubmit(e) {
+    e.preventDefault();
+    let result = [];
+    result = inputValue.map((item) => item.value);
+    setChannelKey(result);
+    localStorage.setItem("channelKey", JSON.stringify(result));
+    return result;
+  }
 
   return (
     <div className="h-screen">
+      <YoutubeChannels channelUrlKeyId={channelKey} buttonName={buttonName} />
+
       {viewSettings ? (
-        <div className="bg-slate-700  p-5 mb-20 mr-10 absolute right-0 bottom-0 text-center rounded-md">
+        <div className="bg-[#0F0F0F] shadow shadow-[#414141] p-5 mb-20 mr-10 absolute right-0 bottom-0 text-center rounded-md  ">
           {/* Channel Buttons */}
-          <div className="flex justify-around items-center text-white">
-            {channelButtons()}
+          <div className="flex justify-around items-center text-white ">
+            {createButtonsFromNames()}
           </div>
           {/* Channel Form */}
-          <form onSubmit={formHandle}>
-            {channelInput()}
-            <button
-              type="submit"
-              className="w-full m-1 p-2 rounded-md bg-slate-950 text-white">
-              Submit
-            </button>
+          {/* onSubmit Eklenecek. */}
+          <form onSubmit={formSubmit}>
+            {getChannelNameInputs()}
+            <div className="flex items-center justify-center">
+              <button
+                type="submit"
+                className="w-1/2 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+                Submit
+              </button>
+              <button
+                onClick={handleSettingsViewStatus}
+                className="w-1/2 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 ">
+                EXIT
+              </button>
+              <button
+                onClick={() => {
+                  alert("Clear Cookie");
+                  handleClearCookies();
+                }}
+                className="w-1/2 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 ">
+                Clear Cookie
+              </button>
+            </div>
           </form>
-          <button
-            onClick={handleClick}
-            className="w-full m-1 p-2 rounded-md bg-slate-950 text-white">
-            EXIT
-          </button>
         </div>
       ) : (
         <div>
-          <Settings handleClick={handleClick} />
+          <Settings handleClick={handleSettingsViewStatus} />
         </div>
       )}
-
-      <div>
-        <YoutubeChannels displayCount="4" />
-      </div>
     </div>
   );
 }
