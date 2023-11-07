@@ -3,20 +3,7 @@ import React, { useEffect, useState } from "react";
 import YoutubeChannels from "../Components/youtubeChannels/youtubeChannels.js";
 import Settings from "../Components/setting/settings.js";
 
-const defaultKeyList = [
-  "Ulp1eJp9efk",
-  "Ulp1eJp9efk",
-  "Ulp1eJp9efk",
-  "Ulp1eJp9efk",
-  "Ulp1eJp9efk",
-  "Ulp1eJp9efk",
-  "Ulp1eJp9efk",
-  "Ulp1eJp9efk",
-  "Ulp1eJp9efk",
-  "Ulp1eJp9efk",
-  "Ulp1eJp9efk",
-  "Ulp1eJp9efk",
-];
+const defaultKeyList = [];
 
 export default function Home() {
   const [viewSettings, setViewSettings] = useState(true);
@@ -58,7 +45,7 @@ export default function Home() {
   };
 
   const createButtonsFromNames = () => {
-    const names = ["4", "6", "9", "12"];
+    const names = ["4", "6", "9", "16"];
     const button = [];
     names.map((name) => {
       button.push(
@@ -80,10 +67,10 @@ export default function Home() {
 
     for (let index = 0; index < buttonName; index++) {
       channelName.push(
-        <div key={index} className="flex items-center m-1 p-1  rounded-sm">
-          <p className="mr-4 text-white ">Channel Name</p>
+        <div key={index} className="flex items-center m-1 p-0.3  rounded-sm">
+          <p className="mr-2 text-white ">Channel Name</p>
           <input
-            className="py-1.5 px-5 mr-2 mb-1 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            className="py-1.5 px-5 mr-2 mb-1 text-sm font-small text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
             key={index}
             type="text"
             onChange={(e) => inputValues(index, e.target.value)}
@@ -119,7 +106,7 @@ export default function Home() {
 
   return (
     <div className="h-screen">
-      <YoutubeChannels channelUrlKeyId={channelKey} buttonName={buttonName} />
+      <YoutubeChannels channelKey={channelKey} buttonName={buttonName} />
 
       {viewSettings ? (
         <div className="bg-[#0F0F0F] shadow shadow-[#414141] p-5 mb-20 mr-10 absolute right-0 bottom-0 text-center rounded-md  ">
