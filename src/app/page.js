@@ -44,28 +44,29 @@ export default function Home() {
     setViewSettings(!viewSettings);
   };
 
-  const createButtonsFromNames = () => {
-    const names = ["4", "6", "9", "16"];
-    const button = [];
-    names.map((name) => {
-      button.push(
-        <button
-          className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-          id="2"
-          key={name}
-          onClick={(e) => setButtonName(e.target.innerHTML)}>
-          {name}
-        </button>
-      );
-    });
+  const handleButtonNameChange = (newButtonName) => {
+    setButtonName(newButtonName);
+    const newInputValue = inputValue.slice(0, parseInt(newButtonName));
+    setInputValue(newInputValue);
+  };
 
-    return button;
+  const createButtonsFromNames = () => {
+    const names = ["1", "4", "9", "16"];
+    return names.map((name) => (
+      <button
+        className={`text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 ${name === buttonName ? 'bg-blue-600' : ''}`}
+        key={name}
+        onClick={() => handleButtonNameChange(name)}
+      >
+        {name}
+      </button>
+    ));
   };
 
   const getChannelNameInputs = () => {
     let channelName = [];
 
-    for (let index = 0; index < buttonName; index++) {
+    for (let index = 0; index < parseInt(buttonName); index++) {
       channelName.push(
         <div key={index} className="flex items-center m-1 p-0.3  rounded-sm">
           <p className="mr-2 text-white ">Channel Name</p>
@@ -75,10 +76,6 @@ export default function Home() {
             type="text"
             onChange={(e) => inputValues(index, e.target.value)}
             value={inputValue[index] ? inputValue[index].value : ""}
-
-            // maxLength={20}
-            // min={1}
-            // required
           />
         </div>
       );
@@ -115,18 +112,19 @@ export default function Home() {
             {createButtonsFromNames()}
           </div>
           {/* Channel Form */}
-          {/* onSubmit Eklenecek. */}
           <form onSubmit={formSubmit}>
             {getChannelNameInputs()}
             <div className="flex items-center justify-center">
               <button
                 type="submit"
-                className="w-1/2 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+                className="w-1/2 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+              >
                 Submit
               </button>
               <button
                 onClick={handleSettingsViewStatus}
-                className="w-1/2 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 ">
+                className="w-1/2 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 "
+              >
                 EXIT
               </button>
               <button
@@ -134,7 +132,8 @@ export default function Home() {
                   alert("Clear Cookie");
                   handleClearCookies();
                 }}
-                className="w-1/2 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 ">
+                className="w-1/2 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 "
+              >
                 Clear Cookie
               </button>
             </div>
