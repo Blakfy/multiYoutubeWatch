@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import SettingsModal from "@/src/Components/Setting/SettingsModal";
+import SettingsModal from "../../src/Components/Setting/SettingsModal";
 import YoutubeChannels from "../../src/Components/YoutubeChannels/YoutubeChannels";
 import SettingPage from "../../src/Components/Setting/SettingPage";
 
