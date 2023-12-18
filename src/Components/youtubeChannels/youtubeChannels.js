@@ -8,7 +8,6 @@ export default function YoutubeChannels(props) {
 
   const [gridClass, setGridClass] = useState("grid-cols-2");
 
-<<<<<<< HEAD
   useEffect(() => {
     switch (props.channelChange) {
       case "1":
@@ -28,20 +27,6 @@ export default function YoutubeChannels(props) {
         break;
     }
   }, [props.channelChange]);
-=======
-  let gridClass;
-  if (numVideos === 1) {
-    gridClass = "grid-cols-1 h-screen w-base";
-  } else if (numVideos === 4) {
-    gridClass = "grid-cols-2 h-screen w-base";
-  } else if (numVideos === 9) {
-    gridClass = "grid-cols-3 h-screen w-base";
-  } else if (numVideos === 16) {
-    gridClass = "grid-cols-4 h-screen w-base";
-  } else {
-    gridClass = "grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-2";
-  }
->>>>>>> b051ce578bc844ed025db8319aa3804aadeb320e
 
   return (
     <div className={`grid ${gridClass} gap-0`}>
