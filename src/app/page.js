@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import SettingsModal from "@/Components/Setting/SettingsModal";
-import YoutubeChannels from "@/Components/YoutubeChannels/YoutubeChannels";
-import SettingPage from "@/Components/Setting/SettingPage";
+import SettingsModal from "@/src/Components/Setting/SettingsModal";
+import YoutubeChannels from "../../src/Components/YoutubeChannels/YoutubeChannels";
+import SettingPage from "../../src/Components/Setting/SettingPage";
 
 export default function Home() {
   const [viewSettings, setViewSettings] = useState(false);
