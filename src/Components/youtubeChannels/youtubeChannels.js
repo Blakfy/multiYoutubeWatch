@@ -30,7 +30,7 @@ export default function YoutubeChannels(props) {
   }, [channelChange]);
 
   return (
-    <div className={`grid ${gridClass} gap-2`}>
+    <div className={`grid ${gridClass} gap-0`}>
       {channelsArray.slice(0, props.channelChange).map((channel, i) => (
         <div key={i} className="text-center p-0">
           <div className="relative" style={{ paddingBottom: "50%" }}>

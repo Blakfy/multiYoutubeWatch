@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import SettingsModal from "@/Components/Setting/SettingsModal";
-import YoutubeChannels from "@/Components/YoutubeChannels/youtubeChannels";
+import YoutubeChannels from "@/Components/YoutubeChannels/YoutubeChannels";
 import SettingPage from "@/Components/Setting/SettingPage";
 
 export default function Home() {
