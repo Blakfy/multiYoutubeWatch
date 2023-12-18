@@ -1,33 +1,46 @@
-import React from "react";
-import channelKey from "../../app/page";
+"use client";
+import React, { useState, useEffect } from "react";
+export default function YoutubeChannels(props) {
+  const channelsArray = Object.keys(props.channels).map((key) => ({
+    id: key,
+    videoId: props.channels[key],
+  }));
 
-export default function YoutubeChannels({ channelKey }) {
-  const numVideos = channelKey.length;
+  const [gridClass, setGridClass] = useState("grid-cols-2");
 
-  let gridClass;
-  if (numVideos === 1) {
-    gridClass = "grid-cols-1";
-  } else if (numVideos === 4) {
-    gridClass = "grid-cols-2";
-  } else if (numVideos === 9) {
-    gridClass = "grid-cols-3";
-  } else if (numVideos === 16) {
-    gridClass = "grid-cols-4";
-  } else {
-    gridClass = "grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-2";
-  }
+  useEffect(() => {
+    switch (props.channelChange) {
+      case "1":
+        setGridClass("grid-cols-1");
+        break;
+      case "4":
+        setGridClass("grid-cols-2");
+        break;
+      case "9":
+        setGridClass("grid-cols-3");
+        break;
+      case "16":
+        setGridClass("grid-cols-4");
+        break;
+      default:
+        setGridClass("grid-cols-4");
+        break;
+    }
+  }, [props.channelChange]);
 
   return (
     <div className={`grid ${gridClass} gap-0`}>
-      {channelKey.slice(0, numVideos).map((videoId, i) => (
+      {channelsArray.slice(0, props.channelChange).map((channel, i) => (
         <div key={i} className="text-center p-0">
           <div className="relative" style={{ paddingBottom: "56.25%" }}>
             <iframe
-              className="absolute inset-0 w-full h-full"
-              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
+              className="absolute inset-0"
+              width={"100%"}
+              height={"100%"}
+              src={`https://www.youtube.com/embed/${channel.videoId}?autoplay=1&mute=1`}
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              title={`YouTube Video ${i}`} 
+              title={`YouTube Video ${i}`}
             />
           </div>
         </div>

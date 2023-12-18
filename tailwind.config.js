@@ -13,6 +13,25 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
+
+    colors: {
+      prime: {
+        petrel: "#3c78b4",
+        DEFAULT: "#fff",
+        black: "#000000",
+        benthic: "#000014",
+        blueDart: "#3c78a0",
+        kuretake: "#001428",
+        mississippi: "#3c648c",
+      },
+    },
+  },
+
+  screen: {
+    sm: "640px",
+    md: "768px",
+    lg: "1280px",
+    xl: "1600px",
   },
   plugins: ["prettier-plugin-tailwindcss"],
 };
