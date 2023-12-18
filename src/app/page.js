@@ -1,12 +1,8 @@
 "use client";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useState } from "react";
 import SettingsModal from "@/Components/Setting/SettingsModal";
-const YoutubeChannels = React.lazy(() =>
-  import("@/Components/YoutubeChannels/YoutubeChannels")
-);
-const SettingPage = React.lazy(() =>
-  import("@/Components/Setting/SettingPage")
-);
+import YoutubeChannels from "@/Components/YoutubeChannels/youtubeChannels";
+import SettingPage from "@/Components/Setting/SettingPage";
 
 export default function Home() {
   const [viewSettings, setViewSettings] = useState(false);
@@ -18,15 +14,12 @@ export default function Home() {
   };
 
   return (
-    <div className="max-h-[1600px]">
-      <Suspense fallback={<div className="text-6xl ">Loading...</div>}>
-        <>
-          <YoutubeChannels channelChange={channelChange} channels={data} />
-        </>
-      </Suspense>
+    <div className="">
+      <YoutubeChannels channelChange={channelChange} channels={data} />
 
       {viewSettings ? (
         <SettingPage
+          data={data}
           setData={setData}
           view={handleSettingsViewStatus}
           setChannelChange={setChannelChange}

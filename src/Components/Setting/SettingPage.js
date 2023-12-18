@@ -20,7 +20,7 @@ export default function SettingPage(props) {
     channel14: "T73ohDE6kh8",
     channel15: "VsuSbXPN93o",
   });
-  const [channelCount, setChannelCount] = useState([
+  const channelCount = [
     {
       id: "channelCount1",
       name: "1",
@@ -37,25 +37,26 @@ export default function SettingPage(props) {
       id: "channelCount16",
       name: "16",
     },
-  ]);
+  ];
 
   function ChannelButton() {
     return (
       <div className="flex justify-between items-stretch m-1">
-        {channelCount.map((item, index) => (
+        {channelCount.map((channel, index) => (
           <button
             onClick={() => {
-              props.setChannelChange(item.name);
+              props.setChannelChange(channel.name);
             }}
             key={index}
-            id={item.id}
+            id={channel.id}
             className="w-10 h-10 rounded-sm bg-prime-petrel hover.bg-prime-kuretake text-prime">
-            {item.name}
+            {channel.name}
           </button>
         ))}
       </div>
     );
   }
+
   useEffect(() => {
     try {
       const localStorageData = localStorage.getItem("key");
@@ -64,7 +65,8 @@ export default function SettingPage(props) {
         setVideoId(parsedData);
         props.setData(parsedData);
       } else {
-        localStorage.setItem("key", JSON.stringify(videoId));
+        const parsedData = JSON.stringify(videoId);
+        localStorage.setItem("key", parsedData);
       }
     } catch (error) {
       console.error("localStorage error:", error);
@@ -113,7 +115,7 @@ export default function SettingPage(props) {
                 id={`channel${index}`}
                 onChange={onChangeHandler}
                 placeholder={`channel${index}`}
-                defaultValue={videoId[key]}
+                defaultValue={props.data[key]}
                 maxLength={20}
                 className="m-1 h-8 p-4 bg-prime-petrel text-prime rounded-sm text-base"
                 type="text"

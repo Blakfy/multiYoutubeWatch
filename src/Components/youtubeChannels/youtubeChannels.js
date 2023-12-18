@@ -7,9 +7,10 @@ export default function YoutubeChannels(props) {
   }));
 
   const [gridClass, setGridClass] = useState("grid-cols-2");
+  const channelChange = props.channelChange;
 
   useEffect(() => {
-    switch (props.channelChange) {
+    switch (channelChange) {
       case "1":
         setGridClass("grid-cols-1");
         break;
@@ -26,10 +27,10 @@ export default function YoutubeChannels(props) {
         setGridClass("grid-cols-4");
         break;
     }
-  }, [props.channelChange]);
+  }, [channelChange]);
 
   return (
-    <div className={`grid ${gridClass} gap-0`}>
+    <div className={`grid ${gridClass} gap-2`}>
       {channelsArray.slice(0, props.channelChange).map((channel, i) => (
         <div key={i} className="text-center p-0">
           <div className="relative" style={{ paddingBottom: "50%" }}>
