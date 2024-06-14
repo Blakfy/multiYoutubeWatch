@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.zindex {
+  z-index: -1;
+}
+
+/* .maincontainer {
+  aspect-ratio: 16 / 9;
+  max-height: 100vh;
+  max-width: 100vw;
+  margin: 0px auto;
+} */
+
+/* iframe {
+  aspect-ratio: 16/9;
+} */
+
+/* settingwindows parent içine ekledim sorun olursa oraya bak. */
+/* .aspectratio {
+  aspect-ratio: 3/9;
+} */

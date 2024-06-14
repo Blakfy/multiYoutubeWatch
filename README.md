@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### [Live Stream](https://multichannels.netlify.app/)
 
-## Getting Started
+---
 
-First, run the development server:
+# Multi-Stream Viewer
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## About The Project
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This open-source project aims to provide a platform where users can simultaneously watch multiple live streams from platforms like Twitch and YouTube. It is designed for an audience that wishes to monitor and engage with several broadcasts at once, whether for entertainment, research, or any other purpose.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Once set up, you can add the channels you wish to follow, and the interface will display multiple streams in a grid format. The application supports real-time switching between streams and volume control for each individual channel.
 
-## Learn More
+## Contributing
 
-To learn more about Next.js, take a look at the following resources:
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# Çoklu Yayın İzleyici
 
-## Deploy on Vercel
+## Proje Hakkında
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Bu açık kaynak projesi, kullanıcıların Twitch ve YouTube gibi platformlardan birden fazla canlı yayını aynı anda izleyebilmelerini sağlayacak bir platform sunmayı amaçlamaktadır. Eğlence, araştırma veya başka herhangi bir amaç için birçok yayını aynı anda izlemek ve bunlarla etkileşimde bulunmak isteyen bir kitleye yöneliktir.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Kullanım
+
+Kurulum tamamlandıktan sonra, takip etmek istediğiniz kanalları ekleyebilir ve arayüz çoklu yayınları ızgara formatında görüntüler. Uygulama, gerçek zamanlı olarak yayınlar arasında geçiş yapmayı ve her bir kanal için bireysel ses kontrolünü desteklemektedir.
+
+## Katkıda Bulunma
+
+Katkılar, açık kaynak topluluğunu öğrenmek, ilham almak ve yaratmak için bu kadar harika bir yer yapan şeydir. Yaptığınız her türlü katkı **çok takdir edilmektedir**
+
